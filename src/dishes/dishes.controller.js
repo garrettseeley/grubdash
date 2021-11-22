@@ -44,7 +44,7 @@ function upDishIsValid(req, res, next) {
 
   if (dish.id && dish.id !== dishId) {
     next({
-      status: 404,
+      status: 400,
       message: `Dish id does not match route id. Dish: ${dish.id}, Route: ${dishId}`,
     });
   }
