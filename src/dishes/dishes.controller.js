@@ -61,13 +61,10 @@ function upDishIsValid(req, res, next) {
 
 // post to "/dishes"
 function create(req, res) {
-  const { data: { name, description, price, image_url } = {} } = req.body;
+  const { data: obj } = req.body;
   const newDish = {
     id: nextId(),
-    name,
-    description,
-    price,
-    image_url,
+    ...obj,
   };
   dishes.push(newDish);
   res.status(201).json({ data: newDish });
@@ -82,8 +79,8 @@ function read(req, res) {
 function update(req, res) {
   const dish = res.locals.dish;
   const originalDish = dish;
-  const { data: { name, description, price, image_url } = {} } = req.body;
-  const upDish = { name, description, price, image_url };
+  const { data: obj } = req.body;
+  const upDish = { ...obj };
   Object.assign(originalDish, upDish);
   res.json({ data: originalDish });
 }

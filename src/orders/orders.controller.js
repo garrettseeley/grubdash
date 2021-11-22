@@ -93,12 +93,10 @@ function checkDeleteStatus(req, res, next) {
 
 // Post request to /orders
 function create(req, res) {
-  const { data: { deliverTo, mobileNumber, status } = {} } = req.body;
+  const { data: obj } = req.body;
   const newOrder = {
     id: nextId(),
-    deliverTo,
-    mobileNumber,
-    status,
+    ...obj
   };
   orders.push(newOrder);
   res.status(201).json({ data: newOrder });
